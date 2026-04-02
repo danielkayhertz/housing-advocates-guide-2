@@ -3568,5 +3568,13 @@ img { max-width: 100%; display: block; }
   });
 })();
 </script>
+<script>
+/* Notify parent frame of content height for seamless iframe embedding */
+if (window.parent !== window) {
+  new ResizeObserver(function() {
+    window.parent.postMessage({type:'guide-resize', height: document.documentElement.scrollHeight}, '*');
+  }).observe(document.documentElement);
+}
+</script>
 </body>
 </html>
